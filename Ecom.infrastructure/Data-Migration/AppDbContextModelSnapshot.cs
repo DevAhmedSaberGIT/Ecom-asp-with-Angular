@@ -83,6 +83,14 @@ namespace Ecom.infrastructure.DataMigration
                     b.HasIndex("ProductId");
 
                     b.ToTable("Photos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            ImageName = "TEST",
+                            ProductId = 1
+                        });
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>
@@ -106,8 +114,10 @@ namespace Ecom.infrastructure.DataMigration
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
+                    b.Property<decimal>("NewPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("OldPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -123,7 +133,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 1,
                             Description = "Samsung Galaxy S21 5G",
                             Name = "Samsung Galaxy S21",
-                            Price = 799.99m
+                            NewPrice = 799.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -131,7 +142,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 1,
                             Description = "Apple iPhone 12 Pro Max",
                             Name = "Apple iPhone 12",
-                            Price = 1099.99m
+                            NewPrice = 1099.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -139,7 +151,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 1,
                             Description = "Dell XPS 13 9310",
                             Name = "Dell XPS 13",
-                            Price = 1299.99m
+                            NewPrice = 1299.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -147,7 +160,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 2,
                             Description = "Nike Air Max 270",
                             Name = "Nike Air Max",
-                            Price = 150.00m
+                            NewPrice = 150.00m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -155,7 +169,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 2,
                             Description = "Adidas Superstar",
                             Name = "Adidas Superstar",
-                            Price = 80.00m
+                            NewPrice = 80.00m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -163,7 +178,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 2,
                             Description = "Levi's 501 Original Fit Jeans",
                             Name = "Levi's Jeans",
-                            Price = 59.99m
+                            NewPrice = 59.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -171,7 +187,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 3,
                             Description = "The Alchemist by Paulo Coelho",
                             Name = "The Alchemist",
-                            Price = 12.99m
+                            NewPrice = 12.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -179,7 +196,8 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 3,
                             Description = "The Great Gatsby by F. Scott Fitzgerald",
                             Name = "The Great Gatsby",
-                            Price = 9.99m
+                            NewPrice = 9.99m,
+                            OldPrice = 0m
                         },
                         new
                         {
@@ -187,35 +205,29 @@ namespace Ecom.infrastructure.DataMigration
                             CategoryId = 3,
                             Description = "To Kill a Mockingbird by Harper Lee",
                             Name = "To Kill a Mockingbird",
-                            Price = 14.99m
+                            NewPrice = 14.99m,
+                            OldPrice = 0m
                         });
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Photo", b =>
                 {
-                    b.HasOne("Ecom.Core.Entities.Product.Product", "Product")
+                    b.HasOne("Ecom.Core.Entities.Product.Product", null)
                         .WithMany("photos")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>
                 {
                     b.HasOne("Ecom.Core.Entities.Product.Category", "Category")
-                        .WithMany("products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Ecom.Core.Entities.Product.Category", b =>
-                {
-                    b.Navigation("products");
                 });
 
             modelBuilder.Entity("Ecom.Core.Entities.Product.Product", b =>

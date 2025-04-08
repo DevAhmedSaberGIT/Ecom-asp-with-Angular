@@ -7,14 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
 
-	      <Folder Include="Entities\" />
-    <Folder Include="Services\" />	  <Folder Include="Entities\" />
-	  <Folder Include="Services\" />
+	      <Folder Include="Entities\" />	  <Folder Include="Entities\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -12,8 +12,9 @@ namespace Ecom.Core.Entities.Product
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        [Precision(18, 2)]
-        public decimal Price { get; set; }
+        public decimal NewPrice { get; set; }
+        public decimal OldPrice { get; set; }
+
         public List<Photo> photos { get; set; } 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
